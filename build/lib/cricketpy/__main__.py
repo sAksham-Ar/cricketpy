@@ -17,8 +17,8 @@ def cricpy():
             separator=' & '
             batting=score['batting']['score']
             bowling=score['bowling']['score']
-            board=[bat['runs']+'/'+bat['wickets']+'('+bat['overs']+')' for bat in batting]
-            bboard=[bowl['runs']+'/'+bowl['wickets']+'('+bowl['overs']+')' for bowl in bowling]
+            board=[bat['runs']+'-'+bat['wickets']+'('+bat['overs']+')' for bat in batting]
+            bboard=[bowl['runs']+'-'+bowl['wickets']+'('+bowl['overs']+')' for bowl in bowling]
             batting_score=separator.join(board)
             bowling_score=separator.join(bboard)
             print(match['team1']['name']+': '+batting_score)
@@ -30,6 +30,7 @@ def cricpy():
         print('match number:commentary,q:quit,r:refresh')
         choice=input()
         if choice=='q':
+            os.system( 'clear' )
             exit()
         elif choice=='r':
             continue
@@ -61,7 +62,7 @@ def cricpy():
                     if balls=='0':
                         sr='0'
                     else:
-                        sr=str(100*int(runs)/int(balls))
+                        sr=str(round(100*int(runs)/int(balls),2))
                     print ("{:<20} {:<5} {:<5} {:<5} {:<5} {:<5}".format(name,runs, balls, fours,six,sr))
                 print('-'*100)
                 print ("{:<20} {:<5} {:<5} {:<5} {:<5} {:<5}".format("Bowler", "O", "M", "R","W","ER"))
@@ -73,9 +74,9 @@ def cricpy():
                 wickets=bowlers['wickets']
                 balls=str((math.floor(float(overs))*6+math.floor((float(overs)-math.floor(float(overs)))*10))/6)
                 if balls==0:
-                    er=0
+                    er='0'
                 else:
-                    er=str(int(runs)/float(balls))
+                    er=str(round(int(runs)/float(balls),2))
                 print ("{:<20} {:<5} {:<5} {:<5} {:<5} {:<5}".format(bowler,overs,maidens,runs,wickets,er))
                 print('-'*100)
                 commentary=c.commentary(match['id'])['commentary']
@@ -105,7 +106,7 @@ def cricpy():
                         print(inning['batteam']+' '+inning['inng_num']+' '+inning['runs']+'-'+inning['wickets']+'('+inning['overs']+')')
                         print('-'*100)
                         batsmens=inning['batcard']
-                        print ("{:<20} {:<15} {:<5} {:<5} {:<5} {:<5} {:<5}".format("Batsman","Dismissal", "R", "B", "4s","6s","SR"))
+                        print ("{:<20} {:<30} {:<5} {:<5} {:<2} {:<2} {:<5}".format("Batsman","Dismissal", "R", "B", "4s","6s","SR"))
                         for batsmen in batsmens:
                             name=batsmen['name']
                             runs=batsmen['runs']
@@ -116,8 +117,8 @@ def cricpy():
                             if balls=='0':
                                 sr='0'
                             else:
-                                sr=str(100*int(runs)/int(balls))
-                            print ("{:<20} {:<15} {:<5} {:<5} {:<5} {:<5} {:<5}".format(name,dismissal,runs, balls, fours,six,sr))
+                                sr=str(round(100*int(runs)/int(balls),2))
+                            print ("{:<20} {:<30} {:<5} {:<5} {:<2} {:<2} {:<5}".format(name,dismissal,runs, balls, fours,six,sr))
                         print('-'*100)
                         print ("{:<20} {:<5} {:<5} {:<5} {:<5} {:<5}".format("Bowler", "O", "M", "R","W","ER"))
                         bowlers=inning['bowlcard']
@@ -129,9 +130,9 @@ def cricpy():
                             wickets=bowl['wickets']
                             balls=str((math.floor(float(overs))*6+math.floor((float(overs)-math.floor(float(overs)))*10))/6)
                             if balls==0:
-                                er=0
+                                er='0'
                             else:
-                                er=str(int(runs)/float(balls))
+                                er=str(round(int(runs)/float(balls),2))
                             print ("{:<20} {:<5} {:<5} {:<5} {:<5} {:<5}".format(bowler,overs,maidens,runs,wickets,er))
                         print('-'*100)
                         extras=inning['extras']
@@ -141,9 +142,9 @@ def cricpy():
                         wides=extras['wides']
                         nballs=extras['nballs']
                         penalty=extras['penalty']
-                        print ("{:<30} {:<2} {:<2} {:<2} {:<2} {:<2} ".format("Extras","b "+byes,"lb "+lbyes,"w "+wides,"nb "+nballs,"p "+penalty))
+                        print ("{:<30} {:<2} {:<2} {:<2} {:<2} {:<2} {:<2}".format("Extras",total," b "+byes,"lb "+lbyes,"w "+wides,"nb "+nballs,"p "+penalty))
                         print('-'*100)
-                        print ("{:<30} {:<5} {:<5} ".format("Fall of Wickets", "Score", "Over"))
+                        print ("{:<30} {:<20} {:<10} ".format("Fall of Wickets", "Score", "Over"))
                         fall_wickets=inning['fall_wickets']
                         for fall_wicket in fall_wickets:
                             name=fall_wicket['name']
@@ -151,7 +152,7 @@ def cricpy():
                             score=fall_wicket['score']
                             overs=fall_wicket['overs']
                             score=score+'-'+wicket
-                            print ("{:<30} {:<10} {:<5} ".format(name,score,overs))
+                            print ("{:<30} {:<20} {:<10} ".format(name,score,overs))
                         print('inning number:inning scorecard,b:back,r:refresh')
                         chh=input()
                         if chh=='b':

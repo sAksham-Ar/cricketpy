@@ -4,25 +4,35 @@ import math
 import os
 def cricpy():
     c=Cricbuzz()
-    f = Figlet(font='jerusalem')
-    print(f.renderText('YPCIRC'))
+    f = Figlet(font='slant')
+    print(f.renderText('CRICPY'))
     while 1:
         matches=c.matches()
-        matches=[match for match in matches if match['mchstate'] in ['inprogress','innings break','stump']]
+        matches=[match for match in matches if match['mchstate'] in ['inprogress','innings break','stump','rain']]
         scores=[]
         os.system( 'clear' )
         print('-'*100)
         for match in matches:
             score=c.livescore(match['id'])
             separator=' & '
-            batting=score['batting']['score']
-            bowling=score['bowling']['score']
-            board=[bat['runs']+'-'+bat['wickets']+'('+bat['overs']+')' for bat in batting]
-            bboard=[bowl['runs']+'-'+bowl['wickets']+'('+bowl['overs']+')' for bowl in bowling]
-            batting_score=separator.join(board)
-            bowling_score=separator.join(bboard)
-            print(match['team1']['name']+': '+batting_score)
-            print(match['team2']['name']+': '+bowling_score)
+            try:
+                try:
+                    batting=score['batting']['score']
+                    board=[bat['runs']+'-'+bat['wickets']+'('+bat['overs']+')' for bat in batting]
+                    batting_score=separator.join(board)
+                    print(score['batting']['team']+': '+batting_score)
+                except:
+                    print(score['batting']['team'])
+                try:
+                    bowling=score['bowling']['score']
+                    bboard=[bowl['runs']+'-'+bowl['wickets']+'('+bowl['overs']+')' for bowl in bowling]
+                    bowling_score=separator.join(bboard)
+                    print(score['bowling']['team']+': '+bowling_score)
+                except:
+                    print(score['bowling']['team'])
+            except:
+                matches.remove(match)
+                continue
             print(match['status'])
             print(match['venue_name'])
             print('-'*100)
@@ -86,17 +96,22 @@ def cricpy():
                     comm=comm.replace('<b>','\033[91m')
                     comm=comm.replace('</b>','\033[0m')
                     comm=comm.replace('<br/>','\n')
+                    comm=comm.replace('<i>','\033[96m')
+                    comm=comm.replace('</i>','\033[0m')
                     if over==None:
                         print(comm)
                     else:
                         print(over+': '+comm)
                 print('-'*100)
-                print('s:scorecard,b:back,r:refresh')
+                print('s:scorecard,b:back,r:refresh,q:quit')
                 ch=input()
                 if ch=='r':
                     continue
                 elif ch=='b':
                     break
+                elif ch=='q':
+                    os.system( 'clear' )
+                    exit()
                 elif ch=='s':
                     scorecard=c.scorecard(match['id'])['scorecard']
                     inning=scorecard[0]
@@ -153,12 +168,15 @@ def cricpy():
                             overs=fall_wicket['overs']
                             score=score+'-'+wicket
                             print ("{:<30} {:<20} {:<10} ".format(name,score,overs))
-                        print('inning number:inning scorecard,b:back,r:refresh')
+                        print('inning number:inning scorecard,b:back,r:refresh,q:quit')
                         chh=input()
                         if chh=='b':
                             break
                         elif chh=='r':
                             continue
+                        elif chh=='q':
+                            os.system( 'clear' )
+                            exit()
                         else:
                             inning=scorecard[4-int(chh)-1]
                             continue

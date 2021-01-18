@@ -1,22 +1,36 @@
 Metadata-Version: 2.1
 Name: cricketpy
-Version: 1.0.3
+Version: 1.0.6
 Summary: View cricket scores,commentary and scorecard from the command line
 Home-page: https://github.com/sAksham-Ar/cricketpy
 Author: Saksham Arya
 Author-email: aryasaksham@gmail.com
 License: GPLv3
 Description: # cricketpy
+        
         View cricket scores,commentary and scorecard from the command line.
         
-        
         # Installation
+        
         Install it as below:
+        
         ```
         pip3 install cricketpy
         ```
+        
+        # Screenshots
+        
+        ![matches](/images/matches.png "matches")
+        
+        ![commentary](/images/commentary.png "commentary")
+        
+        ![scoreboard](/images/scoreboard.png "scoreboard")
+        
+        
         # Run
+        
         just run it as
+        
         ```
         cricketpy
         ```

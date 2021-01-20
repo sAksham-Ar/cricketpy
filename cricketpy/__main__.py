@@ -8,7 +8,6 @@ def cricpy():
     print(f.renderText('CRICPY'))
     while 1:
         matches=c.matches()
-        matches=[match for match in matches if match['mchstate'] in ['inprogress','innings break','stump','rain']]
         scores=[]
         os.system( 'clear' )
         print('-'*100)
@@ -178,7 +177,10 @@ def cricpy():
                             os.system( 'clear' )
                             exit()
                         else:
-                            inning=scorecard[4-int(chh)-1]
+                            try:
+                                inning=scorecard[int(chh)-1]
+                            except:
+                                print("wrong innings")
                             continue
 
 

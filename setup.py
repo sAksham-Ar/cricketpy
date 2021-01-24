@@ -10,7 +10,7 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
     name="cricketpy",
-    version="1.0.8",
+    version="1.0.9",
     description="View cricket scores,commentary and scorecard from the command line",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -25,7 +25,7 @@ setup(
     ],
     packages=["cricketpy"],
     include_package_data=True,
-    install_requires=["pycricbuzz","pyfiglet"],
+    install_requires=["criapi","pyfiglet"],
     entry_points={
         "console_scripts": [
             "cricketpy=cricketpy.__main__:cricpy",

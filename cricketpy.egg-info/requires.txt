@@ -1,2 +1,2 @@
-pycricbuzz
+criapi
 pyfiglet

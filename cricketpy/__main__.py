@@ -61,31 +61,34 @@ def cricpy():
                 # print(match['venue_name'])
                 print('-'*100)
                 commentary=c.commentary(match['id'])
-                batsmens=commentary['batsman']
-                print ("{:<20} {:<5} {:<5} {:<5} {:<5} {:<5}".format("Batsman", "R", "B", "4s","6s","SR"))
-                for batsmen in batsmens:
-                    name=batsmen['name']
-                    runs=batsmen['runs']
-                    balls=batsmen['balls']
-                    fours=batsmen['fours']
-                    six=batsmen['six']
-                    sr=batsmen['sr']
-                    print ("{:<20} {:<5} {:<5} {:<5} {:<5} {:<5}".format(name,runs, balls, fours,six,sr))
-                print('-'*100)
-                print ("{:<20} {:<5} {:<5} {:<5} {:<5} {:<5}".format("Bowler", "O", "M", "R","W","ER"))
-                bowlers=commentary['bowler'][0]
-                bowler=bowlers['name']
-                overs=bowlers['overs']
-                maidens=bowlers['maidens']
-                runs=bowlers['runs']
-                wickets=bowlers['wickets']
-                balls=str((math.floor(float(overs))*6+math.floor((float(overs)-math.floor(float(overs)))*10))/6)
-                if balls==0:
-                    er='0'
-                else:
-                    er=str(round(int(runs)/float(balls),2))
-                print ("{:<20} {:<5} {:<5} {:<5} {:<5} {:<5}".format(bowler,overs,maidens,runs,wickets,er))
-                print('-'*100)
+                try:
+                    batsmens=commentary['batsman']
+                    print ("{:<20} {:<5} {:<5} {:<5} {:<5} {:<5}".format("Batsman", "R", "B", "4s","6s","SR"))
+                    for batsmen in batsmens:
+                        name=batsmen['name']
+                        runs=batsmen['runs']
+                        balls=batsmen['balls']
+                        fours=batsmen['fours']
+                        six=batsmen['six']
+                        sr=batsmen['sr']
+                        print ("{:<20} {:<5} {:<5} {:<5} {:<5} {:<5}".format(name,runs, balls, fours,six,sr))
+                    print('-'*100)
+                    print ("{:<20} {:<5} {:<5} {:<5} {:<5} {:<5}".format("Bowler", "O", "M", "R","W","ER"))
+                    bowlers=commentary['bowler'][0]
+                    bowler=bowlers['name']
+                    overs=bowlers['overs']
+                    maidens=bowlers['maidens']
+                    runs=bowlers['runs']
+                    wickets=bowlers['wickets']
+                    balls=str((math.floor(float(overs))*6+math.floor((float(overs)-math.floor(float(overs)))*10))/6)
+                    if balls==0:
+                        er='0'
+                    else:
+                        er=str(round(int(runs)/float(balls),2))
+                    print ("{:<20} {:<5} {:<5} {:<5} {:<5} {:<5}".format(bowler,overs,maidens,runs,wickets,er))
+                    print('-'*100)
+                except:
+                    print("Match Completed")
                 commentary=commentary['comm']
                 for comment in commentary:
                     comm=comment['comm']

@@ -17,14 +17,24 @@ def cricpy():
             try:
                 try:
                     batting=score['batting']['score']
-                    board=[bat['runs']+'-'+bat['wickets']+'('+bat['overs']+')' for bat in batting]
+                    board=[]
+                    for bat in batting:
+                        try:
+                            board.append(bat['runs']+'-'+bat['wickets']+'('+bat['overs']+')')
+                        except:
+                            board.append(bat['runs']+'-'+bat['wickets'])
                     batting_score=separator.join(board)
                     print(score['batting']['team']+': '+batting_score)
                 except:
                     print(score['batting']['team'])
                 try:
                     bowling=score['bowling']['score']
-                    bboard=[bowl['runs']+'-'+bowl['wickets']+'('+bowl['overs']+')' for bowl in bowling]
+                    bboard=[]
+                    for bowl in bowling:
+                        try:
+                            bboard.append(bowl['runs']+'-'+bowl['wickets']+'('+bowl['overs']+')')
+                        except:
+                            bboard.append(bowl['runs']+'-'+bowl['wickets'])
                     bowling_score=separator.join(bboard)
                     print(score['bowling']['team']+': '+bowling_score)
                 except:
@@ -51,8 +61,18 @@ def cricpy():
                 score=match
                 batting=score['batting']['score']
                 bowling=score['bowling']['score']
-                board=[bat['runs']+'-'+bat['wickets']+'('+bat['overs']+')' for bat in batting]
-                bboard=[bowl['runs']+'-'+bowl['wickets']+'('+bowl['overs']+')' for bowl in bowling]
+                board=[]
+                for bat in batting:
+                        try:
+                            board.append(bat['runs']+'-'+bat['wickets']+'('+bat['overs']+')')
+                        except:
+                            board.append(bat['runs']+'-'+bat['wickets'])
+                bboard=[]
+                for bowl in bowling:
+                        try:
+                            bboard.append(bowl['runs']+'-'+bowl['wickets']+'('+bowl['overs']+')')
+                        except:
+                            bboard.append(bowl['runs']+'-'+bowl['wickets'])
                 batting_score=separator.join(board)
                 bowling_score=separator.join(bboard)
                 print(score['batting']['team']+': '+batting_score)

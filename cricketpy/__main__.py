@@ -57,6 +57,7 @@ def cricpy():
             while 1:
                 os.system( 'clear' )
                 print('-'*100)
+                matches=c.livescore()
                 match=matches[int(choice)-1]
                 score=match
                 batting=score['batting']['score']
@@ -119,11 +120,15 @@ def cricpy():
                 for comment in commentary:
                     comm=comment['comm']
                     over=comment['over']
+                    comm=comm.replace('<strong>','\033[91m')
+                    comm=comm.replace('</strong>','\033[0m')
                     comm=comm.replace('<b>','\033[91m')
                     comm=comm.replace('</b>','\033[0m')
                     comm=comm.replace('<br/>','\n')
                     comm=comm.replace('<i>','\033[96m')
                     comm=comm.replace('</i>','\033[0m')
+                    comm=comm.replace('<span class="over-summary">','')
+                    comm=comm.replace('</span>','')
                     if over==None:
                         print(comm)
                     else:

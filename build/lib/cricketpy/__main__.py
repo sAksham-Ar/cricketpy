@@ -57,6 +57,7 @@ def cricpy():
             while 1:
                 os.system( 'clear' )
                 print('-'*100)
+                matches=c.livescore()
                 match=matches[int(choice)-1]
                 score=match
                 batting=score['batting']['score']

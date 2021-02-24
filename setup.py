@@ -1,16 +1,11 @@
-import pathlib
 from setuptools import setup
 
-# The directory containing this file
-HERE = pathlib.Path(__file__).parent
-
-# The text of the README file
-README = (HERE / "README.md").read_text()
+README="https://github.com/sAksham-Ar/cricketpy"
 
 # This call to setup() does all the work
 setup(
     name="cricketpy",
-    version="1.1.3",
+    version="1.2.1",
     description="View cricket scores,commentary and scorecard from the command line",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -21,7 +16,7 @@ setup(
     classifiers=[
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
     ],
     packages=["cricketpy"],
     include_package_data=True,

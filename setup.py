@@ -5,7 +5,7 @@ README="https://github.com/sAksham-Ar/cricketpy"
 # This call to setup() does all the work
 setup(
     name="cricketpy",
-    version="1.2.1",
+    version="1.2.3",
     description="View cricket scores,commentary and scorecard from the command line",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -20,7 +20,7 @@ setup(
     ],
     packages=["cricketpy"],
     include_package_data=True,
-    install_requires=["criapi","pyfiglet"],
+    install_requires=["criapi","pyfiglet","rich"],
     entry_points={
         "console_scripts": [
             "cricketpy=cricketpy.__main__:cricpy",

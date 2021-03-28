@@ -5,7 +5,6 @@ from criapi import Cricbuzz
 from rich.console import Console
 from rich.table import Table
 from rich import box
-from rich.layout import Layout
 
 def get_score_row(match):
     score = match
@@ -82,6 +81,7 @@ def get_bowler_row(bowler,bowler_table):
     return bowler_table
 
 def get_commentary_row(comment,commentary_table):
+
     comm=comment['comm']
     over=comment['over']
     comm=comm.replace('<strong>','[bold]')
@@ -93,6 +93,10 @@ def get_commentary_row(comment,commentary_table):
     comm=comm.replace('</i>','[/italic]')
     comm=comm.replace('<span class="over-summary">','')
     comm=comm.replace('</span>','')
+    comm=comm.replace("FOUR","[cyan]FOUR[/cyan]")
+    comm=comm.replace("SIX","[green]SIX[/green]")
+    comm=comm.replace("THATS OUT!!","[red]THATS OUT!![/red]")
+
     if comm[0:2]=='<a':
         return commentary_table
     elif over==None:

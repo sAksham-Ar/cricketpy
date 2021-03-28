@@ -5,7 +5,7 @@ README="https://github.com/sAksham-Ar/cricketpy"
 # This call to setup() does all the work
 setup(
     name="cricketpy",
-    version="1.2.3",
+    version="1.2.5",
     description="View cricket scores,commentary and scorecard from the command line",
     long_description=README,
     long_description_content_type="text/markdown",

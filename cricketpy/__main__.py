@@ -5,6 +5,7 @@ from criapi import Cricbuzz
 from rich.console import Console
 from rich.table import Table
 from rich import box
+from rich.layout import Layout
 
 def get_score_row(match):
     score = match
@@ -44,7 +45,7 @@ def get_score_row(match):
 def print_scores(matches):
         console = Console()
         os.system( 'clear' )
-        score_table=Table(show_header=False,show_lines=True)
+        score_table=Table(show_header=False,show_lines=True,expand=True)
         score_table.add_column()
         for match in matches:
             score_table.add_row(get_score_row(match))
@@ -73,7 +74,7 @@ def get_bowler_row(bowler,bowler_table):
     runs=bowler['runs']
     wickets=bowler['wickets']
     balls=str((math.floor(float(overs))*6+math.floor((float(overs)-math.floor(float(overs)))*10))/6)
-    if balls==0:
+    if balls=="0":
         er='0'
     else:
         er=str(round(int(runs)/float(balls),2))
@@ -104,6 +105,7 @@ def cricpy():
     c=Cricbuzz()
     f = Figlet(font='slant')
     console=Console()
+
     print(f.renderText('CRICPY'))
     while 1:
         matches=c.livescore()
@@ -119,7 +121,7 @@ def cricpy():
                 os.system( 'clear' )
                 matches=c.livescore()
                 match=matches[int(choice)-1]
-                single_score_table=Table(show_header=False,show_lines=True)
+                single_score_table=Table(show_header=False,show_lines=True,expand=True)
                 single_score_table.add_column()
                 single_score_table.add_row(get_score_row(match))
                 console.print(single_score_table)
@@ -127,17 +129,17 @@ def cricpy():
 
                 if len(commentary['batsman']):
                     batsmens=commentary['batsman']
-                    current_batsmen_table=Table("Batsman", "R", "B", "4s","6s","SR")
+                    current_batsmen_table=Table("Batsman", "R", "B", "4s","6s","SR",expand=True)
                     for batsmen in batsmens:
                         current_batsmen_table=get_batsmen_row(batsmen,current_batsmen_table)
                     console.print(current_batsmen_table)
-                    current_bowler_table=Table("Bowler", "O", "M", "R","W","ER")
+                    current_bowler_table=Table("Bowler", "O", "M", "R","W","ER",expand=True)
                     bowler=commentary['bowler'][0]
                     current_bowler_table=get_bowler_row(bowler,current_bowler_table)
                     console.print(current_bowler_table)
 
                 commentary=commentary['comm']
-                commentary_table=Table(show_header=False,padding=(1,0,0,0))
+                commentary_table=Table(show_header=False,padding=(1,0,0,0),expand=True)
                 for comment in commentary:
                     commentary_table=get_commentary_row(comment,commentary_table)
                 commentary_table.add_row('s:scorecard,b:back,r:refresh,q:quit')
@@ -158,18 +160,18 @@ def cricpy():
                         os.system( 'clear' )
                         batsmens=inning['batcard']
 
-                        batsmen_table=Table("Batsman","Dismissal", "R", "B", "4s","6s","SR")
+                        batsmen_table=Table("Batsman","Dismissal", "R", "B", "4s","6s","SR",expand=True)
                         for batsmen in batsmens:
                             batsmen_table=get_batsmen_row(batsmen,batsmen_table)
                         console.print(batsmen_table)
 
-                        bowler_table=Table("Bowler", "O", "M", "R","W","ER")
+                        bowler_table=Table("Bowler", "O", "M", "R","W","ER",expand=True)
                         bowlers=inning['bowlcard']
                         for bowl in bowlers:
                             bowler_table=get_bowler_row(bowl,bowler_table)
                         console.print(bowler_table)
 
-                        fall_wickets_table=Table("Fall of Wickets", "Score", "Over")
+                        fall_wickets_table=Table("Fall of Wickets", "Score", "Over",expand=True)
                         fall_wickets=inning['fall_wickets']
                         for fall_wicket in fall_wickets:
                             name=fall_wicket['name']
